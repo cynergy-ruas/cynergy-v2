@@ -15,6 +15,7 @@ const HeadingContainer = styled.div`
 const Text = styled.h2`
     ${ts40b}
     writing-mode: ${props => (props.orientation === 'vertical' ? 'vertical-rl' : 'horizontal-lr')};
+    padding:20px;
     transform: rotate(-180deg);
     direction: rtl;
 `;
