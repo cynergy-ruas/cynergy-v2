@@ -3,6 +3,7 @@ import React from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { Hero, Events, About } from '@components';
+import { ContactUs } from '../components';
 
 const IndexPage = () => (
     <Layout>
@@ -10,6 +11,7 @@ const IndexPage = () => (
         <Hero />
         <Events />
         <About />
+        <ContactUs />
     </Layout>
 );
 

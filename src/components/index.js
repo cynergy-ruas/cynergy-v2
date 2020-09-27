@@ -6,6 +6,7 @@ export { default as SideLine } from './sideline';
 export { default as Heading } from './heading';
 export { default as Hero } from './sections/hero';
 export { default as About } from './sections/about';
+export { default as ContactUs } from './sections/contact';
 export { default as Events } from './sections/events';
 export { default as PrincipleText } from './principleText';
 export { default as Button } from './button';
