@@ -11,3 +11,4 @@ export { default as PrincipleText } from './principleText';
 export { default as Button } from './button';
 export { default as Menu } from './menu';
 export { default as Quote } from './quote';
+export { default as Contact } from './sections/contact';

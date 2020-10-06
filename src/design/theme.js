@@ -46,6 +46,7 @@ export const tsm16r = textStyleMixin(16, 'pt-mono-regular', 0.4, 21);
 export const tsm12r = textStyleMixin(12, 'pt-mono-regular', 0.39, 13);
 export const ts18r = textStyleMixin(18, 'product-sans-regular', 0.18, 22);
 export const ts16r = textStyleMixin(16, 'product-sans-regular', 0.1, 20);
+export const ts29r = textStyleMixin(29, 'product-sans-regular', 0.34, 35);
 
 //Button Styles
 export const tsBtn = textStyleMixin(15, 'product-sans-light', 0.5, 20);

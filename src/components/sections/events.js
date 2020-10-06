@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { eventCardsInfo, eventsTitle } from '@config';
-import { Section, ts40r, tsm18r, ts50b, tsm16r, ts36r, colors } from '@design/theme';
+import { Section, ts40r, tsm18r, ts50b, ts20r, tsm16r, ts36r, colors } from '@design/theme';
 import { media } from '@design/media';
 
 const EventsSection = styled(Section)`
@@ -13,7 +13,7 @@ const EventsSection = styled(Section)`
 `;
 
 const SectionTitle = styled.div`
-    ${ts50b},
+    ${ts50b};
     margin-bottom: 30px;
 `;
 
@@ -29,12 +29,22 @@ const EventCardContainer = styled.div`
 
 const InfoContainer = styled.div`
     position: absolute;
-    ${({ reverse }) => (reverse ? 'left: 0;' : 'right: 0;')}
+
+    ${props =>
+        props.reverse
+            ? css`
+                  left: 0;
+                  animation: ${comeFromLeft} 1s ease-in backwards;
+              `
+            : css`
+                  right: 0;
+                  animation: ${comeFromRight} 1s ease-in backwards;
+              `};
 
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: ${({ reverse }) => (reverse ? 'flex-start;' : 'flex-end;')}
+    align-items: ${props => (props.reverse ? 'flex-start' : 'flex-end')};
 
     width: 60%;
     height: 100%;
@@ -46,9 +56,34 @@ const InfoContainer = styled.div`
     `}
 `;
 
+const comeFromLeft = keyframes`
+    from {
+        transform: translateX(-200%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+`;
+const comeFromRight = keyframes`
+    from {
+        transform: translateX(200%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+`;
 const ImageContainer = styled.div`
     position: absolute;
-    ${({ reverse }) => (reverse ? 'right: 0;' : 'left: 0;')}
+    ${props =>
+        props.reverse
+            ? css`
+                  right: 0;
+                  animation: ${comeFromRight} 1s ease-in backwards;
+              `
+            : css`
+                  left: 0;
+                  animation: ${comeFromLeft} 1s ease-in backwards;
+              `};
 
     display: flex;
     justify-content: center;
@@ -79,8 +114,8 @@ const EventTitle = styled.div`
 `;
 
 const EventDescription = styled.div`
-    ${tsm18r}
-    background-color: ${colors.main};
+    ${ts20r}
+    background-color: #301421;
     margin: ${({ reverse }) => (reverse ? '20px 20px 20px 0px' : '20px 0px 20px 20px')};
     padding: 15px;
 
