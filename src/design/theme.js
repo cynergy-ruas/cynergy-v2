@@ -28,7 +28,6 @@ export const ts60b = textStyleMixin(60, 'product-sans-bold', 1.875, 50);
 export const ts36b = textStyleMixin(36, 'product-sans-bold', 0.6, 36);
 export const ts30b = textStyleMixin(30, 'product-sans-bold', 0.6, 36);
 export const ts30l = textStyleMixin(30, 'product-sans-light', 0.6, 36);
-
 export const ts26b = textStyleMixin(26, 'product-sans-bold', 0.6, 34);
 
 export const tsm24r = textStyleMixin(24, 'pt-mono-regular', 0.67, 28);
