@@ -1,7 +1,8 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { eventCardsInfo, eventsTitle } from '@config';
-import { Section, ts40r, tsm18r, ts50b, ts20r, tsm16r, ts36r, colors } from '@design/theme';
+import { Section, Main, ts40m, ts20r, ts22m, ts16r } from '@design/theme';
+import { Heading } from '@components';
 import { media } from '@design/media';
 
 const EventsSection = styled(Section)`
@@ -10,157 +11,158 @@ const EventsSection = styled(Section)`
     justify-content: flex-start;
     align-items: flex-start;
     min-height: 100vh;
-`;
-
-const SectionTitle = styled.div`
-    ${ts50b};
-    margin-bottom: 30px;
-`;
-
-const EventCardContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    width: 100%;
-    height: 45vh;
-    margin-top: 60px;
 `;
 
-const InfoContainer = styled.div`
-    position: absolute;
+const EventCardsContainer = styled.div``;
 
-    ${props =>
-        props.reverse
-            ? css`
-                  left: 0;
-                  animation: ${comeFromLeft} 1s ease-in backwards;
-              `
-            : css`
-                  right: 0;
-                  animation: ${comeFromRight} 1s ease-in backwards;
-              `};
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: ${props => (props.reverse ? 'flex-start' : 'flex-end')};
-
-    width: 60%;
-    height: 100%;
-
-    ${media.thone`
-        width: 100%;
-        align-items: flex-start;
-        background-color: ${colors.main50alpha};
-    `}
-`;
-
-const comeFromLeft = keyframes`
-    from {
-        transform: translateX(-200%);
-    }
-    to {
-        transform: translateX(0%);
-    }
-`;
-const comeFromRight = keyframes`
-    from {
-        transform: translateX(200%);
-    }
-    to {
-        transform: translateX(0%);
-    }
-`;
-const ImageContainer = styled.div`
-    position: absolute;
-    ${props =>
-        props.reverse
-            ? css`
-                  right: 0;
-                  animation: ${comeFromRight} 1s ease-in backwards;
-              `
-            : css`
-                  left: 0;
-                  animation: ${comeFromLeft} 1s ease-in backwards;
-              `};
-
-    display: flex;
-    justify-content: center;
+const EventCard = styled.div`
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(12, 1fr);
     align-items: center;
-
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-
+    margin-bottom: 60px;
     ${media.thone`
-        width: 100%;
-    `}
+        margin-bottom: 30px;
+    `};
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+    
+    &:nth-of-type(odd) {
+        .data {
+        grid-column: 7 / -1;
+        text-align: right;
+        ${media.desktop`
+            grid-column: 1 / -1;
+        `};
+        ${media.thone`
+            grid-column: 1 / -1;
+        `};
+        }
+        .asset {
+        grid-column: 1 / 8;
+        ${media.desktop`
+            grid-column: 1 / -1;
+            opacity: 1;
+        `};
+        ${media.thone`
+            grid-column: 1 / -1;
+            opacity: 1;
+        `};
+        }
+    }
+    /* direction: ${props => (props.reverse ? 'ltr' : 'rtl')}; */
+    .asset{
+        grid-column: 6 / -1;
+        grid-row: 1 / -1;
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        ${media.desktop`
+            grid-column: 1 / -1;
+            opacity: 1;
+        `};
+        img {
+            width: 100%;
+            max-width: 100%;
+            vertical-align: middle;
+            position: relative;
+            mix-blend-mode: multiply;
+        }
+        &:hover,
+        &:focus{
+            background: transparent;
+            &:before{
+            background: transparent;
+            filter: none;
+            }
+        }
+        &:before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            background-color: rgba(45,0,91,0.65);
+            mix-blend-mode: normal;
+            transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+            width: 100%;
+            height: auto;
+        }
+    }
+    .data{
+        position: relative;
+        grid-column: 1 / 7;
+        grid-row: 1 / -1;
+        z-index: 5;
+        ${media.desktop`
+            grid-column: 1 / -1;
+            padding: 30px 18px 20px;
+            z-index: 5;
+        `};
+        ${media.thone`
+            grid-column: 1 / -1;
+            padding: 30px 18px 20px;
+            z-index: 5;
+        `};
+        ${media.phablet`padding: 30px 25px 20px;`};
+        .heading{
+            text-align: ${props => (props.reverse ? 'right' : 'left')};
+            ${ts40m}
+            ${media.thone`${ts22m}
+                text-align: left;
+            `};
+        }
+        .description{
+            text-align: left;
+            box-shadow: ${props => (props.reverse ? '-4px 4px 14px -2px #000' : '4px 4px 14px -2px #000')}; 
+            margin-top: 26px;
+            background-color: #301421;
+            color: rgba(255,255,255,0.7);
+            padding: 20px 20px 30px;
+            ${ts20r}
+            ${media.thone`
+                ${ts16r}
+                color: rgba(255,255,255,1);
+                background-color: transparent;
+                padding: 10px 0;
+                box-shadow: none;
+                &:hover {
+                    box-shadow: none;
+                }
+            `};
+        }
+    }
 `;
-
-const EventTitle = styled.div`
-    ${ts40r}
-    ${media.tablet`${ts36r}`};
-    ${media.thone`
-        padding-left: 25px;
-        padding-top: 30px;
-    `}
-    ${media.phone`
-        font-size: 30px;
-    `}
-    ${media.tiny`
-        font-size: 24px;
-    `}
-`;
-
-const EventDescription = styled.div`
-    ${ts20r}
-    background-color: #301421;
-    margin: ${({ reverse }) => (reverse ? '20px 20px 20px 0px' : '20px 0px 20px 20px')};
-    padding: 15px;
-
-    ${media.tablet`${tsm16r}`};
-    ${media.thone`
-        background-color: rgba(0, 0, 0, 0);
-        margin: 10px;
-    `}
-    ${media.phone`
-        padding-top: 0px;
-        font-size: 13px;
-    `}
-    ${media.tiny`
-        font-size: 9px;
-    `}
-`;
-
-const Image = styled.img`
-    object-fit: contain;
-    object-position: 0px 100px;
-`;
-
-const EventCard = ({ title, description, image, reverse }) => {
-    // reversed: Image on the right, info on the left.
-    // non reversed: Image on the left, info on the right.
-    return (
-        <EventCardContainer>
-            <ImageContainer reverse={reverse}>
-                <Image src={image} alt={title} />
-            </ImageContainer>
-            <InfoContainer reverse={reverse}>
-                <EventTitle>{title}</EventTitle>
-                <EventDescription reverse={reverse}>{description}</EventDescription>
-            </InfoContainer>
-        </EventCardContainer>
-    );
-};
 
 const Events = () => {
     return (
         <EventsSection id="events">
-            <SectionTitle>{eventsTitle}</SectionTitle>
-            {eventCardsInfo.map((info, index) => (
-                <EventCard key={index} title={info.title} description={info.description} image={info.image} reverse={index % 2 === 0 ? false : true} />
-            ))}
+            <Main orientation="horizontal" containsHeading>
+                <div className="header">
+                    <Heading orientation="horizontal" lineHeightRight={'500px'} lineHeightLeft={'500px'}>
+                        {eventsTitle}
+                    </Heading>
+                </div>
+                <div className="content">
+                    <EventCardsContainer>
+                        {eventCardsInfo.map((info, index) => (
+                            <EventCard key={index} reverse={index % 2 === 0}>
+                                <div className="asset">
+                                    <img src={info.image} alt={info.title} />
+                                </div>
+                                <div className="data">
+                                    <div className="heading">{info.title}</div>
+                                    <div className="description">{info.description}</div>
+                                </div>
+                            </EventCard>
+                        ))}
+                    </EventCardsContainer>
+                </div>
+            </Main>
         </EventsSection>
     );
 };

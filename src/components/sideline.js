@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Line } from '@components';
 import { colors } from '@design/theme';
+import { media } from '@design/media';
 
 const SideLineContainer = styled.div`
     position: fixed;
@@ -12,6 +13,9 @@ const SideLineContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    ${media.bigDesktop`
+        display: none;
+    `};
 `;
 
 const SideLine = ({ children, position }) => {

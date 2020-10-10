@@ -5,12 +5,12 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 // import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import GlobalStyles from '@design';
-import { Navbar, Email, Social, PrincipleText } from '@components';
+import { Navbar, Email, Social, PrincipleText, Loader } from '@components';
 
 const StyledContent = styled.div`
     display: flex;
@@ -21,26 +21,26 @@ const StyledContent = styled.div`
 const isBiggerScreen = typeof window !== `undefined` ? window.innerWidth >= 1200 && window.innerHeight >= 650 : false;
 
 const Layout = ({ children }) => {
-    // const data = useStaticQuery(graphql`
-    //     query SiteTitleQuery {
-    //         site {
-    //             siteMetadata {
-    //                 title
-    //             }
-    //         }
-    //     }
-    // `);
+    const [isLoading, setIsLoading] = useState(true);
+
     return (
         <div id="root">
             <GlobalStyles />
-
-            <StyledContent>
-                <Navbar />
-                <PrincipleText />
-                <main>{children}</main>
-                {isBiggerScreen ? <Email /> : ''}
-                {isBiggerScreen ? <Social /> : ''}
-            </StyledContent>
+            {isLoading ? (
+                <Loader
+                    onFinishLoad={() => {
+                        setIsLoading(false);
+                    }}
+                />
+            ) : (
+                <StyledContent>
+                    <Navbar />
+                    <PrincipleText />
+                    <main>{children}</main>
+                    {isBiggerScreen ? <Email /> : ''}
+                    {isBiggerScreen ? <Social /> : ''}
+                </StyledContent>
+            )}
         </div>
     );
 };
@@ -50,3 +50,13 @@ Layout.propTypes = {
 };
 
 export default Layout;
+
+// const data = useStaticQuery(graphql`
+//     query SiteTitleQuery {
+//         site {
+//             siteMetadata {
+//                 title
+//             }
+//         }
+//     }
+// `);

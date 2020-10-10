@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { LogoIcon } from '@components/icons';
 import { navLinks } from '@config';
 import { tsm18r, colors } from '@design/theme';
 import { media } from '@design/media';
-import Menu from './menu';
-
+import { Menu } from '@components';
+import Icon from './icons';
 const NavbarContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -92,13 +91,43 @@ class Navbar extends Component {
         super(props);
         this.state = {
             isMenuOpen: false,
+            text: '',
+            author: '',
         };
     }
+    async componentDidMount() {
+        window.scrollTo(0, 100);
+        await fetch('https://programming-quotes-api.herokuapp.com/quotes/random')
+            .then(response => response.json())
+            .then(data => {
+                if (data && data['en']) {
+                    this.setState({
+                        text: data['en'],
+                        author: data.author,
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+    noScroll() {
+        window.scrollTo(0, 0);
+    }
+
     toggleMenu = () => {
-        this.setState(prevState => ({
-            isMenuOpen: !prevState.isMenuOpen,
-        }));
-        console.log('');
+        this.setState(
+            prevState => ({
+                isMenuOpen: !prevState.isMenuOpen,
+            }),
+            () => {
+                if (this.state.isMenuOpen) {
+                    window.addEventListener('scroll', this.noScroll);
+                } else {
+                    window.removeEventListener('scroll', this.noScroll);
+                }
+            }
+        );
     };
     render() {
         return (
@@ -106,7 +135,7 @@ class Navbar extends Component {
                 <NavbarContainer>
                     <LogoWrapper>
                         <a href="/">
-                            <LogoIcon />
+                            <Icon iconName="logo" />
                         </a>
                     </LogoWrapper>
                     <Hamburger onClick={() => this.toggleMenu()}>
@@ -122,7 +151,7 @@ class Navbar extends Component {
                         ))}
                     </NavLinks>
                 </NavbarContainer>
-                {this.state.isMenuOpen ? <Menu /> : ''}
+                <Menu isMenuOpen={this.state.isMenuOpen} quote={{ text: this.state.text, author: this.state.author }} handleOnClick={this.toggleMenu.bind(this)} />
             </>
         );
     }
