@@ -5,13 +5,14 @@ import { tsm18r, colors } from '@design/theme';
 import { media } from '@design/media';
 import { Menu } from '@components';
 import Icon from './icons';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 const NavbarContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 40px 10px 40px;
-    ${media.phone`margin: 16px 18px 10px 18px;`};
-    ${media.tablet`margin: 16px 18px 10px 18px;`};
+    margin: 20px 40px 10px 40px;
+    ${media.phone`margin: 30px 18px 10px 18px;`};
+    ${media.tablet`margin: 30px 18px 10px 18px;`};
     ${media.desktop``};
 `;
 const LogoWrapper = styled.div`
@@ -93,10 +94,16 @@ class Navbar extends Component {
             isMenuOpen: false,
             text: '',
             author: '',
+            isMounted: false,
         };
     }
     async componentDidMount() {
-        window.scrollTo(0, 100);
+        setTimeout(() => {
+            this.setState({
+                isMounted: true,
+            });
+        }, 500);
+        window.scrollTo(0, 0);
         await fetch('https://programming-quotes-api.herokuapp.com/quotes/random')
             .then(response => response.json())
             .then(data => {
@@ -130,25 +137,43 @@ class Navbar extends Component {
         );
     };
     render() {
+        const { isMounted } = this.state;
         return (
             <>
                 <NavbarContainer>
-                    <LogoWrapper>
-                        <a href="/">
-                            <Icon iconName="logo" />
-                        </a>
-                    </LogoWrapper>
-                    <Hamburger onClick={() => this.toggleMenu()}>
-                        <HamburgerBox>
-                            <HamburgerLine isMenuOpen={this.state.isMenuOpen} />
-                        </HamburgerBox>
-                    </Hamburger>
+                    <TransitionGroup component={null}>
+                        {isMounted && (
+                            <CSSTransition classNames="fade" timeout={3000}>
+                                <LogoWrapper style={{ transitionDelay: '100ms' }}>
+                                    <a href="/">
+                                        <Icon iconName="logo" />
+                                    </a>
+                                </LogoWrapper>
+                            </CSSTransition>
+                        )}
+                    </TransitionGroup>
+                    <TransitionGroup component={null}>
+                        {isMounted && (
+                            <CSSTransition classNames="fade" timeout={3000}>
+                                <Hamburger onClick={() => this.toggleMenu()}>
+                                    <HamburgerBox>
+                                        <HamburgerLine isMenuOpen={this.state.isMenuOpen} />
+                                    </HamburgerBox>
+                                </Hamburger>
+                            </CSSTransition>
+                        )}
+                    </TransitionGroup>
                     <NavLinks>
-                        {navLinks.map((navLink, index) => (
-                            <NavLink key={index}>
-                                <a href={navLink.url}>{navLink.name}</a>
-                            </NavLink>
-                        ))}
+                        <TransitionGroup component={null}>
+                            {isMounted &&
+                                navLinks.map((navLink, index) => (
+                                    <CSSTransition key={index} classNames="fadedown" timeout={3000}>
+                                        <NavLink style={{ transitionDelay: `${index * 100}ms` }}>
+                                            <a href={navLink.url}>{navLink.name}</a>
+                                        </NavLink>
+                                    </CSSTransition>
+                                ))}
+                        </TransitionGroup>
                     </NavLinks>
                 </NavbarContainer>
                 <Menu isMenuOpen={this.state.isMenuOpen} quote={{ text: this.state.text, author: this.state.author }} handleOnClick={this.toggleMenu.bind(this)} />

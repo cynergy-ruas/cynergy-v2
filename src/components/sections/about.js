@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Heading } from '@components';
 import { Section, ts29r, ts20r, Main } from '@design/theme';
+import { srConfig } from '@config';
 import { media } from '@design/media';
-
+import ScrollReveal from 'scrollreveal';
 const AboutContainer = styled(Section)`
     display: flex;
     flex-direction: column;
@@ -26,15 +27,23 @@ const AboutBody = styled.div`
     `};
 `;
 const About = () => {
+    const scrollRevealContainer = useRef(null);
+    const revealHeading = useRef(null);
+    const revealData = useRef(null);
+    useEffect(() => {
+        ScrollReveal().reveal(scrollRevealContainer.current, srConfig(200));
+        ScrollReveal().reveal(revealHeading.current, srConfig(300));
+        ScrollReveal().reveal(revealData.current, srConfig(400));
+    }, []);
     return (
-        <AboutContainer id="about">
+        <AboutContainer id="about" ref={scrollRevealContainer}>
             <Main orientation="vertical" containsHeading>
-                <div className="header">
+                <div className="header" ref={revealHeading}>
                     <Heading orientation="vertical" lineHeightRight="290px" lineHeightLeft="600px">
                         about
                     </Heading>
                 </div>
-                <div className="content">
+                <div className="content" ref={revealData}>
                     <AboutBody>
                         <p>
                             Cynergy is the first of its kind coding club at <Co>RUAS</Co>. The purpose of Cynergy is embodied in its core open principles - <Co>Collaboration</Co>, <Co>Innovation</Co> and <Co>Competition</Co>. Cynergy is a platorm to promote learning and development of programming skills. It empowers

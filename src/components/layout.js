@@ -15,6 +15,8 @@ import { Navbar, Email, Social, PrincipleText, Loader } from '@components';
 const StyledContent = styled.div`
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    width: 100vw;
     min-height: 100vh;
 `;
 

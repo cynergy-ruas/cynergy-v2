@@ -4,7 +4,24 @@ import { navLinks } from '@config';
 import { tsm18r } from '@design/theme';
 import { media } from '@design/media';
 import { Quote } from '@components';
-
+import Icon from './icons';
+import { socialMedia } from '@config';
+import { colors } from '@design/theme';
+const StyledLink = styled.a`
+    text-decoration: none;
+    margin: 10px;
+    svg {
+        width: 24px;
+        height: 24px;
+        fill: ${colors.text};
+    }
+    &:hover,
+    &:focus {
+        svg {
+            fill: ${colors.main};
+        }
+    }
+`;
 const StyledMenu = styled.div`
     position: fixed;
     top: 0;
@@ -36,6 +53,12 @@ const NavLink = styled.div`
     margin-top: 20%;
     text-align: center;
 `;
+const SocialMediaLinks = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+`;
 
 const Menu = ({ isMenuOpen, quote }) => {
     return (
@@ -47,6 +70,14 @@ const Menu = ({ isMenuOpen, quote }) => {
                     </NavLink>
                 ))}
             </NavLinks>
+            <SocialMediaLinks>
+                {socialMedia &&
+                    socialMedia.map((social, idx) => (
+                        <StyledLink key={idx} href={social.url}>
+                            <Icon iconName={social.iconName} />
+                        </StyledLink>
+                    ))}
+            </SocialMediaLinks>
             <QuoteContainer>
                 <Quote {...quote} />
             </QuoteContainer>

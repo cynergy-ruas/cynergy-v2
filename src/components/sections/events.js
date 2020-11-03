@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { eventCardsInfo, eventsTitle } from '@config';
 import { Section, Main, ts40m, ts20r, ts22m, ts16r } from '@design/theme';
 import { Heading } from '@components';
 import { media } from '@design/media';
+import { srConfig } from '@config';
+import ScrollReveal from 'scrollreveal';
 
 const EventsSection = styled(Section)`
     display: flex;
@@ -139,10 +141,18 @@ const EventCard = styled.div`
 `;
 
 const Events = () => {
+    const scrollRevealContainer = useRef(null);
+    const revealHeading = useRef(null);
+    const revealData = useRef([]);
+    useEffect(() => {
+        ScrollReveal().reveal(scrollRevealContainer.current, srConfig());
+        ScrollReveal().reveal(revealHeading.current, srConfig(100));
+        revealData.current.forEach((ref, i) => ScrollReveal().reveal(ref, srConfig((i + 2) * 100)));
+    }, []);
     return (
-        <EventsSection id="events">
+        <EventsSection id="events" ref={scrollRevealContainer}>
             <Main orientation="horizontal" containsHeading>
-                <div className="header">
+                <div className="header" ref={revealHeading}>
                     <Heading orientation="horizontal" lineHeightRight={'500px'} lineHeightLeft={'500px'}>
                         {eventsTitle}
                     </Heading>
@@ -150,7 +160,7 @@ const Events = () => {
                 <div className="content">
                     <EventCardsContainer>
                         {eventCardsInfo.map((info, index) => (
-                            <EventCard key={index} reverse={index % 2 === 0}>
+                            <EventCard key={index} reverse={index % 2 === 0} ref={el => (revealData.current[index] = el)}>
                                 <div className="asset">
                                     <img src={info.image} alt={info.title} />
                                 </div>

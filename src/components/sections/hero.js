@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ts100b, tsd80d, ts80r, ts50r, ts50b, ts36b, tsd40d, tsd36d, ts40r, ts18r, ts16r, colors, Section } from '@design/theme';
 import { media } from '@design/media';
 import { email, tagline } from '@config';
 import { Button } from '@components';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const StyledContactButton = styled.a`
     margin-top: 60px;
@@ -51,21 +52,55 @@ const Tagline = styled.div`
     ${media.desktop``};
 `;
 const Hero = () => {
-    return (
-        <HeroContainer>
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setIsMounted(true), 1000);
+        return () => clearTimeout(timeout);
+    }, []);
+
+    const one = () => (
+        <div style={{ transitionDelay: '100ms' }}>
             <Greeting>
                 Hello<span>.</span>
             </Greeting>
+        </div>
+    );
+    const two = () => (
+        <div style={{ transitionDelay: '200ms' }}>
             <Name>
                 this is&nbsp;
                 <span>
                     CY<b>NERGY</b>
                 </span>
             </Name>
+        </div>
+    );
+    const three = () => (
+        <div style={{ transitionDelay: '300ms' }}>
             <Tagline>{tagline}</Tagline>
+        </div>
+    );
+    const four = () => (
+        <div style={{ transitionDelay: '400ms', marginTop: '60px' }}>
             <StyledContactButton href={`mailto:${email}`}>
                 <Button text={'Get in touch'} />
             </StyledContactButton>
+        </div>
+    );
+
+    const items = [one, two, three, four];
+
+    return (
+        <HeroContainer>
+            <TransitionGroup component={null}>
+                {isMounted &&
+                    items.map((item, i) => (
+                        <CSSTransition key={i} classNames="fadeup" timeout={3000}>
+                            {item}
+                        </CSSTransition>
+                    ))}
+            </TransitionGroup>
         </HeroContainer>
     );
 };
