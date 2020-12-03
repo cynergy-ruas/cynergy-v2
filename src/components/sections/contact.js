@@ -97,7 +97,8 @@ const Contact = () => {
                             <SectionTitle ref={revealHeading}>have queries?</SectionTitle>
                             <SectionDescription ref={revealDescription}>
                                 our team will love to hear it from you. <br />
-                                need to add some sassy lines here.
+                                we are empathetic and humorous. <br />
+                                (PS: that's the selection criteria to be a team member)
                             </SectionDescription>
                             <StyledContactButton ref={revealButton}>
                                 <img src={TeamImage} alt="team contact" />
