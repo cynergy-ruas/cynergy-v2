@@ -46,7 +46,7 @@ const About = () => {
                 <div className="content" ref={revealData}>
                     <AboutBody>
                         <p>
-                            Cynergy is the first of its kind coding club at <Co>RUAS</Co>. The purpose of Cynergy is embodied in its core open principles - <Co>Collaboration</Co>, <Co>Innovation</Co> and <Co>Competition</Co>. Cynergy is a platorm to promote learning and development of programming skills. It empowers
+                            Cynergy is the first of its kind coding club at <Co>RUAS</Co>. The purpose of Cynergy is embodied in its core open principles - <Co>Collaboration</Co>, <Co>Innovation</Co> and <Co>Competition</Co>. Cynergy is a platform to promote learning and development of programming skills. It empowers
                             students with competitive programming skills through activities like Hackathon and Share sessions.
                         </p>
                     </AboutBody>
