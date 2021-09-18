@@ -2,7 +2,7 @@
   <img alt="Logo" src="https://raw.githubusercontent.com/cynergy-ruas/cynergy-v2/master/src/images/cynergyLogoDark.png" width="500" />
 </div>
 <h1 align="center">
-  add url here - v2
+  <a href="https://cynergy.netlify.app/">https://cynergy.netlify.app/<a>
 </h1>
 
 ## 🛠 Installation & Set Up
