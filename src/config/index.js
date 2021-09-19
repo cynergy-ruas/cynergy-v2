@@ -14,7 +14,7 @@ module.exports = {
     name: 'Cynergy RUAS',
     location: 'Bengaluru, IN',
     email: 'cynergyruas@gmail.com',
-    whatsapp: 'https://wa.me/918511595490',
+    whatsapp: 'https://wa.me/7760366160',
     github: 'https://github.com/cynergy-ruas',
     socialMedia: [
         {

@@ -4,6 +4,7 @@ import TwitterIcon from './twitter';
 import LinkedinIcon from './linkedin';
 import InstagramIcon from './instagram';
 import GithubIcon from './github';
+import SlackIcon from './slack';
 import LogoIcon from './logo';
 
 const ICONS = {
@@ -11,6 +12,7 @@ const ICONS = {
     linkedin: <LinkedinIcon />,
     github: <GithubIcon />,
     instagram: <InstagramIcon />,
+    slack: <SlackIcon />,
     logo: <LogoIcon />,
 };
 
