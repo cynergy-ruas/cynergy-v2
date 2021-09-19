@@ -37,6 +37,11 @@ module.exports = {
             url: 'https://linkedin.com/company/cynergy-ruas',
             iconName: 'linkedin',
         },
+         {
+            name: 'Slack ',
+            url: 'https://join.slack.com/t/cynergy-ruas/shared_invite/zt-vqnbx9is-7Q1sz7pSBDN7Pv66GIymig',
+            iconName: 'linkedin',
+        },
     ],
 
     navLinks: [
