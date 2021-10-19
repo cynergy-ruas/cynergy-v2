@@ -39,7 +39,7 @@ module.exports = {
         },
          {
             name: 'Slack ',
-            url: 'https://join.slack.com/t/cynergy-ruas/shared_invite/zt-vqnbx9is-7Q1sz7pSBDN7Pv66GIymig',
+            url: 'https://join.slack.com/t/cynergy-ruas/shared_invite/zt-xf0xgbth-n2C70TxjF4~Duuw~yUt9rQ',
             iconName: 'slack',
         },
     ],
